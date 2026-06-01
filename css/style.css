@@ -32,6 +32,32 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* ---- light mode overrides ---- */
+html[data-theme="light"] {
+  --bg:        #f4f2ef;
+  --bg-2:      #eae7e2;
+  --bg-elev:   #ffffff;
+  --line:      rgba(30, 60, 45, 0.12);
+  --line-2:    rgba(30, 60, 45, 0.22);
+  --accent:    #1aa873;
+  --accent-2:  #148a5e;
+  --accent-dim:rgba(26, 168, 115, 0.12);
+  --accent-glow: rgba(26, 168, 115, 0.35);
+  --ink:       #1a1f1c;
+  --ink-soft:  #4a5550;
+  --ink-mute:  #7a8580;
+}
+html[data-theme="light"] ::selection { background: var(--accent); color: #fff; }
+html[data-theme="light"] .nav.scrolled { background: rgba(244, 242, 239, 0.82); }
+html[data-theme="light"] .hero::after {
+  background:
+    radial-gradient(120% 90% at 15% 30%, transparent 30%, rgba(244,242,239,0.55) 100%),
+    linear-gradient(180deg, rgba(244,242,239,0.55) 0%, rgba(244,242,239,0.15) 35%, rgba(244,242,239,0.78) 100%);
+}
+html[data-theme="light"] .hero-card { background: linear-gradient(170deg, rgba(255,255,255,0.8), rgba(244,242,239,0.6)); }
+html[data-theme="light"] .about-portrait img { filter: grayscale(0.05) contrast(1.02); }
+html[data-theme="light"] .btn-primary { color: #fff; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
@@ -123,6 +149,21 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.04; l
 }
 .nav-cta:hover { border-color: var(--accent); color: var(--accent) !important; box-shadow: 0 0 24px -8px var(--accent-glow); }
 .nav-burger { display: none; }
+
+/* theme toggle */
+.theme-toggle {
+  width: 36px; height: 36px; flex: none;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-2); border-radius: 10px;
+  background: transparent; color: var(--ink-soft);
+  cursor: pointer; transition: all .25s var(--ease);
+  padding: 0; margin-left: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-moon, .theme-toggle .icon-sun { display: none; }
+html:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
 /* ============================================================
    HERO — cinematic cycling canvas

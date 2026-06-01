@@ -53,6 +53,17 @@
     });
   }
 
+  // theme toggle
+  const toggle = document.querySelector(".theme-toggle");
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      if (next === "dark") { document.documentElement.removeAttribute("data-theme"); localStorage.removeItem("theme"); }
+      else { document.documentElement.setAttribute("data-theme", next); localStorage.setItem("theme", next); }
+    });
+  }
+
   // year
   const y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
 })();
