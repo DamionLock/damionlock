@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "the-real-cost-of-an-ai-thought",
+    "title": "The real cost of an AI thought",
+    "topic": "Datacenters & AI",
+    "date": "2026-05-20",
+    "readMins": 6,
+    "excerpt": "Every prompt has a power bill. Here's how to think about the energy behind inference — and why it changes how we design facilities."
+  },
+  {
+    "slug": "heat-is-not-waste",
+    "title": "Heat is not waste",
+    "topic": "Sustainability",
+    "date": "2026-04-28",
+    "readMins": 5,
+    "excerpt": "The biggest by-product of a data centre is warmth. Treating it as a resource instead of a problem is the most underrated move in sustainable compute."
+  },
+  {
+    "slug": "buildings-that-think",
+    "title": "Buildings that think",
+    "topic": "High-Technology",
+    "date": "2026-04-09",
+    "readMins": 5,
+    "excerpt": "Edge compute and intelligent building systems are quietly merging. The facilities we commission today will increasingly run themselves."
+  }
+]
