@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How to connect GitHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#060908; --bg-2:#0a0f0d; --bg-elev:#0d1411;
+    --line:rgba(150,200,175,.12); --line-2:rgba(150,200,175,.22);
+    --accent:#34e0a1; --accent-dim:rgba(52,224,161,.14); --accent-glow:rgba(52,224,161,.45);
+    --ink:#eef4f0; --ink-soft:#aebab3; --ink-mute:#6f7c75;
+    --display:"Space Grotesk",sans-serif; --body:"IBM Plex Sans",sans-serif; --mono:"IBM Plex Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;padding:48px 24px 80px}
+  .wrap{max-width:760px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent)}
+  h1{font-family:var(--display);font-size:clamp(30px,5vw,46px);font-weight:600;letter-spacing:-.02em;margin:16px 0 12px;line-height:1.05}
+  .sub{color:var(--ink-soft);font-size:18px;max-width:52ch;margin-bottom:48px}
+  .steps{display:flex;flex-direction:column;gap:20px}
+  .step{display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start;border:1px solid var(--line);border-radius:16px;background:var(--bg-elev);padding:26px 28px}
+  .num{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:20px;color:var(--accent);background:var(--accent-dim);border:1px solid var(--line-2)}
+  .step h3{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:6px}
+  .step p{color:var(--ink-soft);font-size:15.5px}
+  .step p strong{color:var(--ink)}
+  /* mock composer */
+  .mock{margin:18px 0 4px;border:1px solid var(--line-2);border-radius:14px;background:var(--bg);padding:14px;position:relative}
+  .mock-row{display:flex;align-items:center;gap:12px}
+  .mock-input{flex:1;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--ink-mute);font-size:14px}
+  .icon-btn{width:42px;height:42px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);flex:none;position:relative}
+  .icon-btn.hot{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 4px var(--accent-dim),0 0 26px -6px var(--accent-glow);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--accent-dim),0 0 26px -6px var(--accent-glow)}50%{box-shadow:0 0 0 7px transparent,0 0 30px -2px var(--accent-glow)}}
+  .icon-btn svg{width:20px;height:20px}
+  .callout{position:absolute;top:-14px;right:6px;transform:translateY(-100%);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--accent);background:var(--bg-elev);border:1px solid var(--accent);border-radius:8px;padding:7px 11px;white-space:nowrap}
+  .callout::after{content:"";position:absolute;bottom:-6px;right:18px;width:10px;height:10px;background:var(--bg-elev);border-right:1px solid var(--accent);border-bottom:1px solid var(--accent);transform:rotate(45deg)}
+  /* mock menu */
+  .menu{margin-top:14px;border:1px solid var(--line-2);border-radius:12px;background:var(--bg-2);overflow:hidden;max-width:320px}
+  .menu-item{display:flex;align-items:center;gap:12px;padding:13px 16px;font-size:14.5px;border-bottom:1px solid var(--line);color:var(--ink-soft)}
+  .menu-item:last-child{border-bottom:none}
+  .menu-item.hot{color:var(--accent);background:var(--accent-dim);font-weight:500}
+  .menu-item svg{width:18px;height:18px;flex:none}
+  .note{margin-top:36px;border-left:2px solid var(--accent);padding:14px 0 14px 20px;color:var(--ink-soft);font-size:15px}
+  .note strong{color:var(--ink)}
+  .safe{margin-top:14px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;color:var(--ink-mute);border:1px dashed var(--line-2);border-radius:10px;padding:14px 16px}
+  .safe svg{width:20px;height:20px;color:var(--accent);flex:none}
+  @media(max-width:520px){.step{grid-template-columns:1fr;gap:14px}.num{width:42px;height:42px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">One-time setup</div>
+  <h1>Connecting GitHub — step by step</h1>
+  <p class="sub">This lets me create your repository and push the site live. You log in on GitHub's own page — I never see your password.</p>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="num">1</div>
+      <div>
+        <h3>Find the chat box at the bottom of your screen</h3>
+        <p>This is where you type messages to me. Just to its left there's a small <strong>“+” / import icon</strong>. That's the button we need.</p>
+        <div class="mock">
+          <div class="callout">Click this icon ↓</div>
+          <div class="mock-row">
+            <div class="icon-btn hot" aria-label="import menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <div class="mock-input">Type a message…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div>
+        <h3>Click “Connect GitHub” in the menu</h3>
+        <p>A small menu pops up. Look for the <strong>GitHub</strong> option and click it.</p>
+        <div class="menu">
+          <div class="menu-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Upload a file
+          </div>
+          <div class="menu-item hot">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.480-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+            Connect GitHub
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div>
+        <h3>Log in &amp; authorize — on GitHub's website</h3>
+        <p>A GitHub page opens. Sign in there (if you aren't already) and click the green <strong>Authorize</strong> button. This happens entirely on GitHub — your password stays with them.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4</div>
+      <div>
+        <h3>Come back and tell me “done”</h3>
+        <p>Send me any message — “connected” or “done” — and I'll create the <strong>damionlock</strong> repository, push every file, and switch on free hosting.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="safe">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+    You never type your password into the chat. Authorization is handled securely by GitHub itself.
+  </div>
+
+  <div class="note">
+    <strong>Don't see “Connect GitHub” in the menu?</strong> It may already be connected — in that case just reply “connected” and I'll continue. If you're stuck, tell me what you do see and I'll guide you.
+  </div>
+</div>
+</body>
+</html>
