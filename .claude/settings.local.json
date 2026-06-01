@@ -1,20 +1,29 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:api.anthropic.com)",
-      "Bash(curl -s \"https://api.anthropic.com/v1/design/h/G1LvNEWZ8_S9G_lXl4N4ZA\" -o /tmp/design_file.bin)",
-      "Read(//tmp/**)",
-      "Read(//private/tmp/**)",
-      "Bash(tar -xzf design_file.tar.gz)",
-      "Bash(cp /tmp/damionlock-com/project/assets/damion-lock.jpg /Users/damion/Documents/damionlock.com/assets/damion-lock.jpg && echo \"Asset copied\")",
-      "Bash(mkdir -p /Users/damion/.claude/projects/-Users-damion-Documents-damionlock-com/memory)",
-      "Bash(gh auth *)",
-      "Bash(git --version)",
-      "Bash(brew --version)",
-      "Bash(git init *)",
+      "Read(**)",
+      "Edit(**)",
+      "Write(**)",
       "Bash(git add *)",
-      "Bash(git commit -m 'Initial site — damionlock.com *)",
-      "Bash(git config *)"
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git fetch*)",
+      "Bash(git remote*)",
+      "Bash(git branch*)",
+      "Bash(git config*)",
+      "Bash(gh *)",
+      "Bash(find *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(brew *)",
+      "Bash(curl *)",
+      "Bash(tar *)",
+      "WebFetch(*)"
     ]
   }
 }
