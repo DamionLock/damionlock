@@ -1,70 +1,67 @@
-# /feature — Auto-build and deploy a feature for damionlock.com
+Implement a feature for damionlock.com and deploy it live. No questions, no confirmations — just build and ship.
 
-You are an automated feature builder for damionlock.com — Damion Lock's personal brand site.
+## The feature request
 
-## Your job
+$ARGUMENTS
 
-The user describes a feature they want. You implement it fully, commit, and push — no confirmation steps, no "shall I proceed?", no drafts. Just build it and deploy it.
+## How this site works
 
-## Input
+damionlock.com is a plain static site (HTML/CSS/JS) deployed to GitHub Pages via GitHub Actions. Every push to `main` auto-deploys within a minute. There is no build step, no framework, no npm.
 
-The user's feature request is: $ARGUMENTS
+### Files you'll be working with
 
-## Site architecture (read these files before making changes)
+Read any file before modifying it. Here's the map:
 
-This is a **plain static site** — HTML/CSS/JS, no framework, no build step. Deployed to GitHub Pages via GitHub Actions on push to `main`.
-
-```
-index.html              — main holding page (hero, focus pillars, about, writing teaser, contact)
-blog.html               — writing index with topic filters
-post.html               — single-article reader (renders Markdown via marked.js)
-css/style.css           — all styling (CSS custom properties at top)
-js/scenes.js            — cinematic canvas background (3 animated scenes)
-js/site.js              — homepage interactions + contact form + scroll reveals
-js/blog.js              — blog index with topic filters
-js/post.js              — single post reader
-js/posts.js             — shared blog data loader (fetches manifest + markdown)
-posts/manifest.json     — blog post registry (newest first)
-posts/*.md              — blog posts in Markdown with front-matter
-assets/                 — images (headshot, etc.)
-CNAME                   — custom domain: damionlock.com
-.github/workflows/      — CI/CD deploy pipeline
-```
+| File | What it does |
+|------|-------------|
+| `index.html` | Main holding page — hero with animated canvas, focus pillars, about, writing teaser, contact form |
+| `blog.html` | Writing index with topic filter pills |
+| `post.html` | Single-article reader (renders Markdown via marked.js CDN) |
+| `css/style.css` | All styling — CSS custom properties at the top, section-commented |
+| `js/scenes.js` | Cinematic canvas background — 3 animated scenes that crossfade |
+| `js/site.js` | Homepage: nav scroll state, scroll-reveal observer, blog teaser loader, contact form, year |
+| `js/blog.js` | Blog index: topic filters, card rendering |
+| `js/post.js` | Post reader: fetches markdown, renders via marked |
+| `js/posts.js` | Shared blog API: manifest fetch, markdown fetch, date formatting |
+| `posts/manifest.json` | Blog post registry — newest first, drives both blog index and homepage teaser |
+| `posts/*.md` | Blog posts — Markdown with YAML front-matter |
+| `assets/` | Images (headshot, etc.) |
 
 ### Design system
 
-- **Dark cinematic** aesthetic — dark base `#060908`, matrix-green accent `#34e0a1`
-- **Fonts:** Space Grotesk (display), IBM Plex Sans (body), IBM Plex Mono (labels/code)
-- **CSS variables** are defined at the top of `css/style.css` — always use them
-- **Components:** `.btn`, `.btn-primary`, `.btn-ghost`, `.pillar`, `.post-card`, `.channel`, `.eyebrow`, `.section`, `.wrap`, `.reveal` (scroll animation)
-- **Responsive:** breakpoints at 940px and 560px
-- **Accessibility:** respects `prefers-reduced-motion`
+The visual language is dark and cinematic — inherited from one93nine.com with a matrix-green accent. Everything is driven by CSS custom properties defined at the top of `css/style.css`:
 
-### Blog system
+- **Palette:** dark base `--bg: #060908`, accent `--accent: #34e0a1`, soft text `--ink-soft: #aebab3`
+- **Typography:** `--display` (Space Grotesk) for headings, `--body` (IBM Plex Sans) for text, `--mono` (IBM Plex Mono) for labels/code/buttons
+- **Layout:** `--maxw: 1240px`, `.wrap` for centered containers, `.section` for vertical rhythm
+- **Components:** `.btn .btn-primary` (green CTA), `.btn-ghost` (outline), `.pillar` (feature card), `.post-card` (blog card), `.channel` (contact row), `.eyebrow` (section label with accent line)
+- **Animation:** `.reveal` class + IntersectionObserver in site.js for scroll-triggered fade-up
+- **Responsive:** collapses to single-column at 940px, font adjusts at 560px
+- **Motion:** respects `prefers-reduced-motion` media query
 
-To add a blog post:
-1. Create `posts/slug-name.md` with front-matter (`title`, `topic`, `date`)
-2. Add entry to top of `posts/manifest.json` (newest first) with `slug`, `title`, `topic`, `date`, `readMins`, `excerpt`
-3. Topics: `Datacenters & AI`, `High-Technology`, `Sustainability` (new ones auto-create filter pills)
+Always use the existing CSS variables rather than hardcoding colours or fonts. New CSS goes in `css/style.css` following the existing commented-section pattern.
 
-## Rules
+### Adding a blog post
 
-1. **Read before writing.** Always read any file you're about to modify. Understand the existing patterns.
-2. **Match the design system.** Use existing CSS variables, component classes, and patterns. New CSS goes in `css/style.css` following the existing section structure.
-3. **No frameworks.** This is vanilla HTML/CSS/JS. No npm, no build tools, no React.
-4. **Mobile-first responsive.** Test your additions against the existing breakpoints.
-5. **Keep it accessible.** Semantic HTML, aria labels where needed, reduced-motion support.
-6. **Commit message style:** short imperative sentence describing what was added/changed.
-7. **Auto-push.** After committing, always `git push origin main`. The site auto-deploys.
-8. **No questions.** If a decision is ambiguous, use your best judgement matching the existing site's style and tone. Only ask the user if something is genuinely impossible to infer (e.g. they ask to add content but provide no content).
+1. Create `posts/your-slug.md` with front-matter: `title`, `topic`, `date`
+2. Add an entry to the **top** of `posts/manifest.json` with: `slug`, `title`, `topic`, `date`, `readMins`, `excerpt`
+3. Standard topics: `Datacenters & AI`, `High-Technology`, `Sustainability` — new topics auto-generate filter pills
 
-## Execution steps
+## How to execute
 
-1. Read the relevant source files to understand current state
-2. Implement the feature (edit/create files as needed)
-3. `git add` the changed files (specific filenames, not `.` or `-A`)
-4. `git commit -m "descriptive message"`
-5. `git push origin main`
-6. Report what was done and what URL it's live at (https://damionlock.com)
+1. **Read first.** Read every file you plan to change so you understand the current state and patterns.
+2. **Build the feature.** Edit or create files as needed. Match the existing design system, patterns, and code style. Vanilla HTML/CSS/JS only.
+3. **Make it responsive.** Anything new should work at all breakpoints (check the existing `@media` queries in style.css).
+4. **Ship it.** Stage the specific files you changed, commit with a clear imperative message, and push:
+   ```
+   git add <specific files>
+   git commit -m "Add <what you built>"
+   git push origin main
+   ```
+5. **Report back.** Tell the user what was built, which files changed, and that it's deploying to https://damionlock.com.
 
-Now implement the feature described above.
+## Decision-making
+
+Use your best judgement for any ambiguous decisions — match the existing site's style, tone, and patterns. The only reason to ask the user a question is if they've asked for something that genuinely cannot be inferred (e.g. "add a testimonial" with no testimonial text provided). Otherwise, just build it.
+
+Now implement the feature.
