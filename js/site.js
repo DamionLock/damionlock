@@ -30,9 +30,12 @@
     }).catch(() => { teaser.innerHTML = `<p class="empty-state">Blog posts will appear here.</p>`; });
   }
 
-  // contact form (Formspree). Replace the endpoint in index.html (data-endpoint).
+  // contact form (Formspree) with spam protection:
+  // 1. _gotcha honeypot field — bots fill it, humans can't see it, Formspree silently discards
+  // 2. timing gate — reject submissions faster than 2s after load (bots submit instantly)
   const form = document.getElementById("leadForm");
   if (form) {
+    const formLoadTime = Date.now();
     const status = form.querySelector(".form-status");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -42,6 +45,10 @@
         status.textContent = "Form not yet connected — add your Formspree ID. (See README)";
         status.classList.add("err"); return;
       }
+      // spam checks
+      const honeypot = form.querySelector('[name="_gotcha"]');
+      if (honeypot && honeypot.value) return; // bot filled the hidden field
+      if (Date.now() - formLoadTime < 2000) return; // submitted too fast — likely a bot
       const btn = form.querySelector("button[type=submit]");
       const orig = btn.innerHTML; btn.innerHTML = "Sending…"; btn.disabled = true;
       try {
