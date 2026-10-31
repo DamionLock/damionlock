@@ -1,13 +1,5 @@
 [
   {
-    "slug": "connection-test",
-    "title": "Connection test",
-    "topic": "Sustainability",
-    "date": "2026-10-31",
-    "readMins": 1,
-    "excerpt": "Automated publishing test, removed shortly."
-  },
-  {
     "slug": "the-real-cost-of-an-ai-thought",
     "title": "The real cost of an AI thought",
     "topic": "Datacenters & AI",
