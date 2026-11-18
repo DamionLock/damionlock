@@ -2,10 +2,7 @@
 title: "Does Your Next AI Project Actually Need a Building? A Ten-Minute Test"
 topic: "Datacenters & AI"
 date: 2026-11-18
-banner: https://damionlock.com/posts/does-your-next-ai-project-actually-need-a-building-a-ten-minute-test.png
 ---
-
-![Does Your Next AI Project Actually Need a Building? A Ten-Minute Test](https://damionlock.com/posts/does-your-next-ai-project-actually-need-a-building-a-ten-minute-test.png)
 
 I set out my AI infrastructure thesis on Medium earlier this month: begin with the workload and let the building be the last decision, not the first. Several people replied with a fair challenge. Fine in principle, but how do I know which camp my project falls into?
 
